@@ -71,8 +71,8 @@ def compute_gradient(w, x, y, b, m):
 # w is float, model parameter
 # b is float, model parameter
 # m is integer
-    dj_dw = 0
-    dj_db = 0
+    dj_dw = 0.0
+    dj_db = 0.0
     for i in range(m):
         f_wb_xi = f_wb(w, x[i], b)
         dj_dw_i = (f_wb_xi - y[i]) * x
@@ -112,7 +112,7 @@ def gradient_descent(x, y, w_init, b_init, alpha, num_iters):
 
     for i in range(num_iters):
         dj_dw, dj_db = compute_gradient(x, y, w, b)    # calculate gradient. Note that you are passing arrays for x and y
-        w = w - alpha * dj_db                          # tune w using gradient descent formula w = w - α * dJ(w,b) / dw 
+        w = w - alpha * dj_dw                          # tune w using gradient descent formula w = w - α * dJ(w,b) / dw 
         b = b - alpha * dj_db                          # tune b using gradient descent formula b = b - α * dJ(w,b) / dw 
 
         #the rest is storing data points for visualization
