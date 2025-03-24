@@ -1,14 +1,19 @@
 # _s(i) notation means individual i instance in summation i.e. for i=3, for i=m-2 etc.
 '''    
-# algorithm for linear regression of one model variable: fwb(x_s(i)) = wx_s(i) + b = wx[i] + b
+x (size in feet squared)	| 	y (price in $1000s)
+1	2100			        |	400
+2	1400			        |	230
+3	 850			        |	315	
+
+# algorithm for linear regression of one variable model: fwb(x_s(i)) = wx_s(i) + b = wx[i] + b
 algorithm is the same as slope intercept equation y = ax + b
 y = f(w,b) = wx + b
 '''
 def f_wb(w, x, b):                      #f_wb computes wx[i] + b for a single x[i]
 # x is x[i] in list or array
 # w and b are floats
-    f_wb = (w * x) + b
-    return f_wb
+    _f_wb = (w * x) + b
+    return _f_wb
 
 '''
 cost function algorithm for one variable using Mean Squared Error MSE
@@ -17,7 +22,6 @@ cost function algorithm for one variable using Mean Squared Error MSE
 J(w,b) = 1/2m Σ (fwb(x_s(i)) - y_s(i))**2
               i=0
            
-
               m-1
 J(w,b) = 1/2m Σ (wx_s(i) + b - y_s(i))**2
               i=0
@@ -30,12 +34,12 @@ def compute_cost(x, y, w, b, m):
 # w is float, model parameter
 # b is float, model parameter
 # m is integer
-    cost = 0.0
+    cost_sum = 0.0
     for i in range(m):
-        f_wb_xi = f_wb(w, x[i], b)
-        cost_i = 1 / (2*m) * (f_wb_xi - y[i])**2
-        cost = cost + cost_i
-
+        f_wb_xi = f_wb(w, x[i], b)     # compute fw,b(x)
+        cost_i = (f_wb_xi - y[i])**2   # compute the individual interior value
+        cost_sum = cost_sum + cost_i           # sum all the interior values 
+    cost = (1 / (2 * m)) * cost_sum     # multiply summed interior values by outer value
     return cost
 
 '''
@@ -64,14 +68,13 @@ dJ(w,b) / db = 1/m Σ (wx_s(i) + b - y_s(i))
 def compute_gradient(w, x, y, b, m):
 # x is list or array; input data with m values
 # y is list or array; target data with m values
-# m is list or array
 # w is float, model parameter
 # b is float, model parameter
 # m is integer
     dj_dw = 0
     dj_db = 0
     for i in range(m):
-        f_wb_xi = f_wb(w, x, b)
+        f_wb_xi = f_wb(w, x[i], b)
         dj_dw_i = (f_wb_xi - y[i]) * x
         dj_db_i = f_wb_xi - y[i]
         dj_dw += dj_dw_i
