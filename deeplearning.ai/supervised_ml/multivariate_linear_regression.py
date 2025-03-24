@@ -46,3 +46,30 @@ def m_compute_cost(x, y, w, b, m):
     cost = (1 / (2 * m)) * cost_sum         # multiply summed interior values by outer value
     return cost
 
+'''
+gradient for multiple variables means 
+
+                   m-1
+dJ(w,b) / dw = 1/m Σ (fwb(x_s(i)) - y_s(i)) * x
+                   i = 0
+
+                   m-1
+dJ(w,b) / db = 1/m Σ (fwb(x_s(i)) - y_s(i))
+                   i = 0
+
+which equates to
+
+                   m-1
+dJ(w,b) / dw = 1/m Σ (wx_s(i) + b - y_s(i)) * x
+                   i = 0
+
+                   m-1
+dJ(w,b) / db = 1/m Σ (wx_s(i) + b - y_s(i))
+                   i = 0
+
+gradient descent to find ideal values for w and b using iteration
+{ 
+w = w - α * dJ(w,b) / dw   
+b = b - α * dJ(w,b) / dw 
+} for j = 0..n - 1
+'''

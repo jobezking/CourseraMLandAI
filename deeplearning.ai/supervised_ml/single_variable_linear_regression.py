@@ -44,7 +44,7 @@ def compute_cost(x, y, w, b, m):
 
 '''
 gradient descent, which must be calculated simultaneously
-d is actually ∂ for partial derivative
+d is actually ∂ for partial derivative. First compute gradient:
 
                    m-1
 dJ(w,b) / dw = 1/m Σ (fwb(x_s(i)) - y_s(i)) * x
@@ -84,10 +84,10 @@ def compute_gradient(w, x, y, b, m):
 
 '''
 gradient descent to find ideal values for w and b using iteration
-
-w = w - α * dJ(w,b) / dw 
+{ for j = 1
+w = w - α * dJ(w,b) / dw   
 b = b - α * dJ(w,b) / dw 
-
+}
             m-1
 w = w - α/m Σ (wx_s(i) + b - y_s(i)) * x
             i = 0
